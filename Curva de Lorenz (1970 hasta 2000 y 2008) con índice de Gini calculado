@@ -1,0 +1,66 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import quad
+
+def funcion_cuadratica(x, a, b, c):
+    return a * x**2 + b * x + c
+"""
+# Coeficientes de la función cuadrática
+#2008
+a = 1.3027
+b = -0.3677
+c = 0.0264
+"""
+"""
+#1970
+a=1.1174
+b=-0.1524
+c=0.0133
+"""
+#"""
+#1980
+a=1.1496
+b=-0.1897
+c=0.0162
+#"""
+"""
+#1990
+a=1.2161
+b=-0.2682
+c=0.0207
+"""
+"""
+#2000
+a=1.2808
+b=-0.3452
+c=0.0258
+"""
+# Generar valores de x para la función cuadrática
+x_cuadratica = np.linspace(0, 1, 100)
+
+# Calcular los valores de la función cuadrática
+L_x = funcion_cuadratica(x_cuadratica, a, b, c)
+
+# Asegurarse de que L_x esté dentro del rango [0, 1]
+L_x = np.clip(L_x, 0, 1)
+
+# Graficar la función cuadrática como curva de Lorenz
+plt.figure(figsize=(8, 6))
+plt.plot(x_cuadratica, L_x, label=f'Curva de Lorenz: ${a}x^2  {b}x + {c}$', color='b')
+plt.plot([0, 1], [0, 1], color='r', linestyle='--', label='Línea de igualdad')
+
+plt.xlabel('Porcentaje acumulado de hogares')
+plt.ylabel('Porcentaje acumulado de ingresos')
+plt.title('Curva de Lorenz')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Calcular el índice de Gini como dos veces el área entre y=x y L(x)
+def integrand(x):
+    return x - funcion_cuadratica(x, a, b, c)
+
+area, _ = quad(integrand, 0, 1)
+indice_gini = 2 * area
+
+print(f'Índice de Gini (Función cuadrática): {indice_gini:.4f}')
