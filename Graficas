@@ -1,0 +1,24 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definir las constantes
+k = 0.8501  # Constante multiplicativa
+n = 2.0564  # Exponente
+
+# Definir la función del modelo de potencia
+def power_model(x, k, n):
+    return k * x ** n
+
+# Generar datos de ejemplo
+x = np.linspace(0, 1, 100)
+y = power_model(x, k, n)
+
+# Graficar los datos
+plt.figure(figsize=(8, 6))
+plt.plot(x, y, label=f'$Y = {k} \cdot X^{n}$', color='blue')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Modelo de Potencia')
+plt.legend()
+plt.grid(True)
+plt.show()
